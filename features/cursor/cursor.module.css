@@ -1,0 +1,18 @@
+.scope {
+  min-height: 100vh;
+}
+@media (hover: hover) and (pointer: fine) {
+  .scope[data-theme-cursor='true'] {
+    cursor: var(--cursor-arrow), auto;
+  }
+  .scope[data-theme-cursor='true'] :where(a, button, summary, [role='button']) {
+    cursor: var(--cursor-pointer), pointer;
+  }
+  .scope[data-theme-cursor='true']
+    :where(input, textarea, [contenteditable='true'], [data-cursor='text']) {
+    cursor: text;
+  }
+  .scope[data-theme-cursor='true'] :where(:disabled, [aria-disabled='true']) {
+    cursor: not-allowed;
+  }
+}

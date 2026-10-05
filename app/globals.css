@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: var(--font-body);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+body {
+  margin: 0;
+}
+::selection {
+  background-color: var(--color-selection-background);
+  color: var(--color-selection-text);
+  text-shadow: none;
+}
+/* Keep interface chrome unselectable without blocking copyable page content. */
+:where(
+  button,
+  summary,
+  nav a,
+  [data-ui-control],
+  img[aria-hidden='true'],
+  svg[aria-hidden='true'],
+  input[type='range']
+) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* Editable fields retain selection even when nested inside interface chrome. */
+:where(input:not([type='range']), textarea, [contenteditable='true']) {
+  -webkit-user-select: text;
+  user-select: text;
+}
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 4px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+main {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--page-gutter) var(--space-7);
+  min-height: 65vh;
+  scroll-margin-top: var(--space-3);
+}
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: break-word;
+}
+p {
+  line-height: 1.65;
+  max-width: 68ch;
+}
+.skip-link {
+  position: absolute;
+  left: var(--page-gutter);
+  top: 0;
+  padding: 1rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  transform: translateY(-150%);
+  z-index: var(--layer-skip);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+@media (forced-colors: active) {
+  ::selection {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+  :focus-visible {
+    outline-color: Highlight;
+  }
+}

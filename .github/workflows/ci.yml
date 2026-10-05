@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  web-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate
+        run: npm run check
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+      - name: Save browser failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-failure-evidence
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  pages-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build:pages
+      - run: npm run test:pages
+      - name: Save Pages browser failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-browser-failure-evidence
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

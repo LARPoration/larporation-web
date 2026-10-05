@@ -1,0 +1,48 @@
+{
+  "name": "larporation-web",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=24.21.0 <25",
+    "npm": ">=11.19.0 <12"
+  },
+  "packageManager": "npm@11.19.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run validate:resources && npm run validate:history && next build",
+    "start": "next start",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test:resources && npm run test:history && npm run build && npm test",
+    "validate:resources": "node scripts/validate-resources.ts",
+    "test:resources": "node --test tests/resources.test.ts",
+    "validate:history": "node scripts/validate-history.ts",
+    "test:history": "node --test tests/history.test.ts",
+    "build:pages": "npm run validate:resources && npm run validate:history && node scripts/pages/build.ts",
+    "test:pages": "playwright test --config playwright.pages.config.ts"
+  },
+  "dependencies": {
+    "next": "16.3.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@next/eslint-plugin-next": "16.3.8",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.19.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "10.12.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "prettier": "3.9.9",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.0"
+  },
+  "type": "module"
+}

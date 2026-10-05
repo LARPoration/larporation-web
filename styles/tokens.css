@@ -1,0 +1,28 @@
+/* Approved construction palette. Native system fonts require no font download. */
+:root {
+  --color-paper: #f3f0e8;
+  --color-ink: #20211e;
+  --color-line: #cccac0;
+  --color-muted: #57594f;
+  --color-accent: #b83213;
+  --color-pop: #ff663e;
+  --color-selection-background: var(--color-pop);
+  --color-selection-text: var(--color-paper);
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-mono: Consolas, monospace;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+  --content-width: 72rem;
+  --page-gutter: clamp(1.25rem, 4vw, 2.125rem);
+  --focus-ring: 3px solid var(--color-accent);
+  --layer-skip: 20;
+  --layer-credit-outline: 40;
+  --layer-credit-card: 50;
+  --layer-timeline: 60;
+  --layer-timeline-panel: 61;
+}
